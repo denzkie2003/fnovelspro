@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="og:image" content=""/>
+  <meta name="author" content="DenZ" />
+  <meta name="description" content="FNovels is a free light weight website that contains many Light Novels. All Light Novels here is free to download. Enjoy!" />
+  <meta property="og:site_name" content="Fnovels - Free Light Novels"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="logo.png" />
+  <meta property="facebook:image" content="logo.png"/>
+  <!-- CSS Frameworks -->
+  <link rel="stylesheet" href="w3.css" />
+  <link rel="stylesheet" href="fnovels.min.css" />
+  <link rel="stylesheet" href="offline-theme-slide.css" type="text/css" media="all" />
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+  <title>Fnovels - Free Light Novels</title>
+  <style>
+    .item-container{
+      margin:0;padding:15px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      grid-column-gap: 15px;
+      grid-row-gap: 15px;
+      overflow-y: scroll;
+      scrollbar-width:20px;
+    }
+    .item-container > div{width:100%;height:auto}
+    .item{position:relative}
+    .item > a{width: 170px;height:207px}
+    .item > a > img{width:inherit;height:inherit;border-radius:5px}
+    .item > h5{width:100%;background: -webkit-linear-gradient(43deg, #ffd500, #ff8500);-webkit-background-clip: text;-webkit-text-fill-color: transparent;margin:0;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;font-weight:800;font-size:10px}
+    .item > a:hover img{color:inherit}
+    .search-container{position: sticky;top:5px}
+    #search:focus{outline:none}
+    .sResult{width:91%;height:250px;background-color:white;box-shadow:2px 3px 10px 2px black;position:absolute;border-radius:5px;overflow-y:scroll;display:none;list-style-type:none;z-index:30}
+    .sResult li{border:none}
+    .sResult li a{text-decoration:none}
+    .genre_collect{width:100%;background:gold;padding:3px;border-radius:5px;margin-top:3px}
+    .genres{width:100%;background:white;border-radius:5px}
+    .genres > a{margin: 0 7px}
+    .item > .webnovel{position:absolute;top:0;left:0;background-color:#ff0074;color:white;border-bottom-right-radius:10px;font-size:10px;padding:3px 5px;border-top-left-radius:5px}
+  </style>
+</head>
+<body>
+  <div class="search-container w3-container" style="margin-top:10px;">
+     <form method="get">
+       <input class="w3-input w3-round" type="search" name="search" id="search" placeholder="Search LN with English Title" onkeyup="searchFunction()"/>
+     </form>
+     <ul class="w3-ul sResult list" id="novelList"></ul>
+     <!-- Genre container-->
+
+   <!--<div class="genre_collect" style="display:flex">
+
+     <span>Genre:</span>
+     <div class="genres" style="display:flex;overflow-x:scroll;overflow-y:none;">
+       <a href="#">Action</a>
+       <a href="#">Adventure</a>
+       <a href="#">Comedy</a>
+       <a href="#">Drama</a>
+       <a href="romance.html">Romance</a>
+     </div>
+   </div>
+   </div>-->
+
+   <div class="item-container" w3-include-html="post.html" id="itemContainer"></div>
+   
+  <script src="w3.js" type="text/javascript" charset="utf-8"></script>
+  <script src="jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+  <script src="offline.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="fnovels.min.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    w3.includeHTML();
+    
+    function searchFunction(){
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('search');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("novelList");
+        li = ul.getElementsByTagName('li');
+        
+        if(input.value !== "")ul.style.display="block"
+        else ul.style.display="none";
+        // Loop through all list items, and hide those who don't match the search query
+          for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              li[i].style.display = "";
+          } else {
+            li[i].style.display = "none";
+          }
+        }
+    }
+  </script>
+</body>
+</html>
